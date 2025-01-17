@@ -6,20 +6,28 @@
 #    By: vakande <vakande@student.42barcelona.      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 18:51:47 by vakande           #+#    #+#              #
-#    Updated: 2025/01/15 18:56:13 by vakande          ###   ########.fr        #
+#    Updated: 2025/01/15 20:11:27 by vakande          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_diaplay_file
-FILES = display_file.c
+CC = gcc
+NAME = ft_display_file
+SRC = main.c
+HEAD = header.h
+OBJ = $(SRC:.c=.o) 
+FLAGS = -Wall -Wextra -Werror
 
-.PHONY: all clean fclean
+all: $(NAME)
 
-all:
-		@gcc -Wall -Wextra -Werror -o $(NAME) $(FILES)
+$(NAME): $(OBJ)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ)
 
+%.o: %.c
+	$(CC) $(FLAGS) -c $< -o $@
 clean:
-		@rm -f *.o
+	@rm -f $(OBJ)
+	@echo "object files removed"
 
-fclean: clean
-		@rm -f $(NAME)
+fclean:
+	@rm -f $(NAME)
+	@echo "$(NAME) is deleted"
